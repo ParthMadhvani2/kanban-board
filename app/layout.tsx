@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Header from '@/components/sections/header';
+import KanbanBoardContextProvider from '@/providers/kanban-board-context-provider';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <script async src="https://cdn.splitbee.io/sb.js"></script>
+      </head>
+      <body className={inter.className}>
+        <KanbanBoardContextProvider>
+          <Header />
+          {children}
+        </KanbanBoardContextProvider>
+      </body>
     </html>
   );
 }
